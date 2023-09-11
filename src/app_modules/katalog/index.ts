@@ -1,3 +1,17 @@
-import ViewKatalog from "./view";
+import KatalogLayout from "./layout";
+import ViewProfile from "./profile/view";
+import CreateProfile from "./profile/create/create";
+import UploadFoto from "./profile/upload/view";
+import EditProfile from "./profile/edit/edit";
+import CreateProfileLayout from "./profile/create/layout";
+import EditProfileLayout from "./profile/edit/layout";
 
-export {ViewKatalog}
+export {
+  KatalogLayout,
+  ViewProfile,
+  CreateProfile,
+  UploadFoto,
+  EditProfile,
+  CreateProfileLayout,
+  EditProfileLayout,
+};

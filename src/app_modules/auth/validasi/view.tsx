@@ -1,9 +1,11 @@
 "use client";
 
 import {
+  Box,
   Button,
   Center,
   Flex,
+  Group,
   PinInput,
   Stack,
   Text,
@@ -16,14 +18,14 @@ import toast from "react-simple-toasts";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { valueCookies } from "../state/s_token";
+import { IconCircleLetterH, IconLetterH } from "@tabler/icons-react";
+import { Warna } from "@/app/lib/warna";
 
 export default function Validasi() {
   const [inputOtp, setInputOtp] = useState("");
   const [otp, setOtp] = useAtom(valueOtp);
   const [nomor, setNomor] = useAtom(valueNomor);
   const [valToken, setToken] = useAtom(valueCookies);
-
-
 
   const router = useRouter();
 
@@ -46,38 +48,49 @@ export default function Validasi() {
       .then((val) => {
         if (val.status == 200) {
           toast("Selamat datang");
-          return router.push("/dev/home");
+          return setTimeout(() => router.push("/dev/home"), 2000);
         } else {
           toast("Regis dulu");
-          return setTimeout(() => (router.push("/dev/auth/register"), 2000))
+          return setTimeout(() => (router.push("/dev/auth/register"), 2000));
         }
       });
   }
 
   return (
     <>
-      {JSON.stringify(otp)}``
-      {JSON.stringify(nomor)}
+      {/* {JSON.stringify(otp)}``
+      {JSON.stringify(nomor)} */}
       <Flex
         align={"center"}
         justify={"center"}
         direction={"column"}
-        gap={"xl"}
+        gap={50}
         h={"100vh"}
       >
-        <Title>Validasi OTP</Title>
-        <PinInput
-          onChange={(val) => {
-            setInputOtp(val);
-          }}
-        />
-        <Button
-          onClick={() => {
-            onValid();
-          }}
-        >
-          Submit
-        </Button>
+        <Title order={4}>Validasi Kode OTP</Title>
+        <IconCircleLetterH size={150} />
+        <Flex direction={"column"} gap={"xl"} align={"center"}>
+          <Flex justify={"center"} gap={1} direction={"column"} align={"center"}>
+            <Text>Enter the 6-digit OTP , we’ve just sent</Text>
+            <Text>to {nomor}</Text>
+          </Flex>
+          <PinInput
+            onChange={(val) => {
+              setInputOtp(val);
+            }}
+          />
+          <Button
+            compact
+            radius={50}
+            bg={Warna.hijau_tua}
+            color="green"
+            onClick={() => {
+              onValid();
+            }}
+          >
+            Submit
+          </Button>
+        </Flex>
       </Flex>
     </>
   );
